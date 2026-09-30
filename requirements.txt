@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 fastapi
 uvicorn
 jinja2
@@ -6,13 +5,4 @@ sqlalchemy
 python-multipart
 google-genai
 python-dotenv
-=======
-fastapi
-uvicorn
-jinja2
-sqlalchemy
-python-multipart
-google-genai
-python-dotenv
->>>>>>> 2f5501ad2b6d308365c3fc8438d5bc4f96c99a6c
 markdown
