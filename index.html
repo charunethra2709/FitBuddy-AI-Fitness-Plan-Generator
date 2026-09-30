@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitBuddy - AI Fitness Plan Generator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 38px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d5d9df;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+
+        .button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background: #3730a3;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>🏋️ FitBuddy</h1>
+            <p>AI Fitness Plan Generator</p>
+            <p>Get a personalized fitness and nutrition plan.</p>
+        </div>
+
+        <form action="/generate" method="post">
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input
+                    type="number"
+                    id="age"
+                    name="age"
+                    min="13"
+                    max="100"
+                    placeholder="Enter your age"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select gender</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="goal">Fitness Goal</label>
+                <select id="goal" name="goal" required>
+                    <option value="">Select your goal</option>
+                    <option value="General Fitness">General Fitness</option>
+                    <option value="Strength">Strength</option>
+                    <option value="Flexibility">Flexibility</option>
+                    <option value="Endurance">Endurance</option>
+                    <option value="Healthy Lifestyle">Healthy Lifestyle</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="fitness_level">Fitness Level</label>
+                <select id="fitness_level" name="fitness_level" required>
+                    <option value="">Select fitness level</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="diet">Diet</label>
+                <select id="diet" name="diet" required>
+                    <option value="">Select diet</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Non-Vegetarian">Non-Vegetarian</option>
+                    <option value="Vegan">Vegan</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="workout_days">Workout Days Per Week</label>
+                <input
+                    type="number"
+                    id="workout_days"
+                    name="workout_days"
+                    min="1"
+                    max="7"
+                    placeholder="Example: 3"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="medical_conditions">
+                    Medical Conditions
+                </label>
+
+                <textarea
+                    id="medical_conditions"
+                    name="medical_conditions"
+                    placeholder="Enter any relevant medical conditions, or type None"
+                ></textarea>
+            </div>
+
+            <button type="submit" class="button">
+                Generate My Fitness Plan
+            </button>
+            <div style="text-align: center; margin-top: 15px;">
+    <a href="/users"
+       style="
+       display: inline-block;
+       padding: 12px 22px;
+       background: #111827;
+       color: white;
+       text-decoration: none;
+       border-radius: 8px;
+       font-weight: bold;
+       ">
+        📋 View Saved Plans
+    </a>
+</div>
+
+        </form>
+
+        <div class="footer">
+            FitBuddy • AI-powered fitness planning
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FitBuddy - Saved Plans</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .header h1 {
+            font-size: 34px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .user-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+        }
+
+        .user-card h2 {
+            margin-bottom: 18px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .profile-item {
+            background: #f4f7fb;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .profile-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .plan-section {
+            margin-top: 20px;
+        }
+
+        .plan-section h3 {
+            margin-bottom: 12px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        .plan table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .plan th {
+            background: #4f46e5;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .plan td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        .plan tr:nth-child(even) {
+            background: #f8f9fc;
+        }
+
+        .nutrition {
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .nutrition ul,
+        .nutrition ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .nutrition li {
+            margin-bottom: 7px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background: #3730a3;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 600px) {
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .user-card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>🏋️ FitBuddy</h1>
+        <p>Saved Fitness Plans</p>
+    </div>
+
+
+    {% if users %}
+
+        {% for user in users %}
+
+        <div class="user-card">
+
+            <h2>👤 {{ user.name }}</h2>
+
+
+            <div class="profile-grid">
+
+                <div class="profile-item">
+                    <strong>Age</strong>
+                    {{ user.age }}
+                </div>
+
+                <div class="profile-item">
+                    <strong>Gender</strong>
+                    {{ user.gender }}
+                </div>
+
+                <div class="profile-item">
+                    <strong>Goal</strong>
+                    {{ user.goal }}
+                </div>
+
+                <div class="profile-item">
+                    <strong>Fitness Level</strong>
+                    {{ user.fitness_level }}
+                </div>
+
+                <div class="profile-item">
+                    <strong>Diet</strong>
+                    {{ user.diet }}
+                </div>
+
+                <div class="profile-item">
+                    <strong>Workout Days</strong>
+                    {{ user.workout_days }} days/week
+                </div>
+
+            </div>
+
+
+            <div class="plan-section">
+
+                <h3>🏋️ Fitness Plan</h3>
+
+                <div class="table-container">
+
+                    <div class="plan">
+
+                        {{ user.fitness_plan | safe }}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="plan-section">
+
+                <h3>🥗 Nutrition Tips</h3>
+
+                <div class="nutrition">
+
+                    {{ user.nutrition_tips | safe }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="empty">
+
+            <h2>No saved plans yet.</h2>
+
+            <p>Create a fitness plan first.</p>
+
+        </div>
+
+    {% endif %}
+
+
+    <div class="button-container">
+
+        <a href="/" class="button">
+            ← Create New Plan
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
