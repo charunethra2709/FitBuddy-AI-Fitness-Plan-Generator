@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FitBuddy - Your Fitness Plan</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background: #f4f7fb;
+            padding: 30px 15px;
+        }
+
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+
+        .header p {
+            color: #666;
+        }
+
+
+        /* CARD */
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.06);
+        }
+
+
+        .card h2 {
+            margin-bottom: 18px;
+        }
+
+
+        /* PROFILE */
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+
+        .profile-item {
+            background: #f4f7fb;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+
+        .profile-item strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+
+        /* TABLE */
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+
+        .plan table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+
+            min-width: 800px;
+        }
+
+
+        .plan th {
+            background: #4f46e5;
+            color: white;
+
+            padding: 14px;
+
+            border: 1px solid #ddd;
+
+            text-align: left;
+        }
+
+
+        .plan td {
+            padding: 14px;
+
+            border: 1px solid #ddd;
+
+            text-align: left;
+
+            vertical-align: top;
+        }
+
+
+        .plan tr:nth-child(even) {
+            background: #f8f9fc;
+        }
+
+
+        .plan ul {
+            margin-left: 20px;
+        }
+
+
+        .plan li {
+            margin-bottom: 5px;
+        }
+
+
+        /* FEEDBACK */
+
+        .feedback-box {
+            width: 100%;
+
+            min-height: 120px;
+
+            padding: 14px;
+
+            border: 1px solid #d5d9df;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            resize: vertical;
+
+            margin-bottom: 15px;
+        }
+
+
+        .feedback-box:focus {
+            outline: none;
+
+            border-color: #4f46e5;
+        }
+
+
+        .update-button {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #16a34a;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .update-button:hover {
+            background: #15803d;
+        }
+
+
+        /* NUTRITION */
+
+        .nutrition {
+            line-height: 1.7;
+
+            color: #333;
+        }
+
+
+        .nutrition h1,
+        .nutrition h2,
+        .nutrition h3 {
+            margin-top: 15px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .nutrition ul,
+        .nutrition ol {
+            margin-left: 25px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .nutrition li {
+            margin-bottom: 7px;
+        }
+
+
+        /* BUTTON */
+
+        .button-container {
+            text-align: center;
+
+            margin: 30px 0;
+        }
+
+
+        .button {
+            display: inline-block;
+
+            padding: 13px 25px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+
+        .button:hover {
+            background: #3730a3;
+        }
+
+
+        /* SUCCESS MESSAGE */
+
+        .success-message {
+            background: #dcfce7;
+
+            color: #166534;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            color: #777;
+
+            padding: 20px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+
+            .card {
+                padding: 18px;
+            }
+
+
+            .plan th,
+            .plan td {
+                padding: 10px;
+
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>🏋️ FitBuddy</h1>
+
+        <p>Your Personalized Fitness Plan</p>
+
+    </div>
+
+
+    {% if updated %}
+
+    <div class="success-message">
+
+        ✅ Your fitness plan has been updated based on your feedback.
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- PROFILE -->
+
+    <div class="card">
+
+        <h2>👤 Your Profile</h2>
+
+
+        <div class="profile-grid">
+
+
+            <div class="profile-item">
+
+                <strong>Name</strong>
+
+                {{ profile.name }}
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Age</strong>
+
+                {{ profile.age }}
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Gender</strong>
+
+                {{ profile.gender }}
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Goal</strong>
+
+                {{ profile.goal }}
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Fitness Level</strong>
+
+                {{ profile.fitness_level }}
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Diet</strong>
+
+                {{ profile.diet }}
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <strong>Workout Days</strong>
+
+                {{ profile.workout_days }} days/week
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- FITNESS PLAN -->
+
+    <div class="card">
+
+        <h2>🏋️ 7-Day Fitness Plan</h2>
+
+
+        <div class="table-container">
+
+            <div class="plan">
+
+                {{ fitness_plan | safe }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- UPDATE PLAN -->
+
+    <div class="card">
+
+        <h2>🔄 Update Your Plan</h2>
+
+        <p style="margin-bottom: 15px; color: #666;">
+
+            Give feedback about what you would like changed.
+
+        </p>
+
+
+        <form action="/update-plan" method="post">
+
+
+            <!-- CURRENT PLAN -->
+
+            <input
+                type="hidden"
+                name="current_plan"
+                value="{{ fitness_plan_raw }}"
+            >
+
+
+            <!-- PROFILE INFORMATION -->
+
+            <input
+                type="hidden"
+                name="name"
+                value="{{ profile.name }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="age"
+                value="{{ profile.age }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="gender"
+                value="{{ profile.gender }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="goal"
+                value="{{ profile.goal }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="fitness_level"
+                value="{{ profile.fitness_level }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="diet"
+                value="{{ profile.diet }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="workout_days"
+                value="{{ profile.workout_days }}"
+            >
+
+
+            <input
+                type="hidden"
+                name="medical_conditions"
+                value="{{ profile.medical_conditions }}"
+            >
+
+
+            <!-- NUTRITION -->
+
+            <input
+                type="hidden"
+                name="nutrition_tips"
+                value="{{ nutrition_tips_raw }}"
+            >
+
+
+            <!-- FEEDBACK -->
+
+            <textarea
+                class="feedback-box"
+                name="feedback"
+                placeholder="Example: Make the exercises simpler and include more rest days."
+                required
+            ></textarea>
+
+
+            <button
+                type="submit"
+                class="update-button"
+            >
+
+                🔄 Update Fitness Plan
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- NUTRITION -->
+
+    <div class="card">
+
+        <h2>🥗 Nutrition Tips</h2>
+
+
+        <div class="nutrition">
+
+            {{ nutrition_tips | safe }}
+
+        </div>
+
+    </div>
+
+
+    <!-- CREATE NEW PLAN -->
+
+    <div class="button-container">
+
+        <a
+            href="/"
+            class="button"
+        >
+
+            ← Create Another Plan
+
+        </a>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        FitBuddy • AI-powered fitness planning
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
