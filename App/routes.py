@@ -222,13 +222,21 @@ async def all_users(request: Request):
     db = SessionLocal()
 
     try:
-
         users = db.query(UserPlan).all()
 
+        for user in users:
+            user.fitness_plan = markdown.markdown(
+                user.fitness_plan,
+                extensions=["extra"]
+            )
+
+            user.nutrition_tips = markdown.markdown(
+                user.nutrition_tips,
+                extensions=["extra"]
+            )
+
     finally:
-
         db.close()
-
 
     return templates.TemplateResponse(
         request,
