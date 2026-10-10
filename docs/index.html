@@ -1,0 +1,174 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitBuddy - AI Fitness Plan Generator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2563eb;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 11px;
+            margin-top: 6px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 22px;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 9px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background: #e2e8f0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>FitBuddy</h1>
+    <p style="text-align:center">AI Fitness Plan Generator</p>
+
+    <form id="fitnessForm">
+        <label for="name">Name</label>
+        <input id="name" name="name" required>
+
+        <label for="age">Age</label>
+        <input id="age" name="age" type="number" min="1" required>
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select>
+
+        <label for="goal">Goal</label>
+        <select id="goal" name="goal" required>
+            <option value="">Select</option>
+            <option>General Fitness</option>
+            <option>Strength</option>
+            <option>Flexibility</option>
+            <option>Endurance</option>
+        </select>
+
+        <label for="fitness_level">Fitness Level</label>
+        <select id="fitness_level" name="fitness_level" required>
+            <option value="">Select</option>
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+        </select>
+
+        <label for="diet">Diet</label>
+        <select id="diet" name="diet" required>
+            <option value="">Select</option>
+            <option>Vegetarian</option>
+            <option>Non-Vegetarian</option>
+            <option>Vegan</option>
+        </select>
+
+        <label for="workout_days">Workout Days (1–7)</label>
+        <input id="workout_days" name="workout_days"
+               type="number" min="1" max="7" required>
+
+        <label for="medical_conditions">Medical Conditions (optional)</label>
+        <textarea id="medical_conditions" name="medical_conditions"
+                  rows="3"></textarea>
+
+        <button type="submit">Generate Fitness Plan</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    // Replace this with your actual Render service URL.
+    const API_URL = "https://fitbuddy-ai-fitness-plan-generator-iziw.onrender.com/";
+
+    const form = document.getElementById("fitnessForm");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        result.textContent = "Generating your plan. Please wait...";
+
+        try {
+            const response = await fetch(`${API_URL}/generate`, {
+                method: "POST",
+                body: new FormData(form)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server returned ${response.status}`);
+            }
+
+            const html = await response.text();
+            const parsed = new DOMParser().parseFromString(html, "text/html");
+
+            // Display the generated result page inside this page.
+            result.replaceChildren(...Array.from(parsed.body.childNodes));
+
+        } catch (error) {
+            console.error(error);
+            result.textContent =
+                "Could not generate the plan. Check the Render URL and backend CORS settings.";
+        }
+    });
+</script>
+</body>
+</html>
+```
