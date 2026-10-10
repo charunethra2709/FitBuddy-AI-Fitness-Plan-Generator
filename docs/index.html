@@ -148,9 +148,9 @@
 
         try {
             const response = await fetch(`${API_URL}/generate`, {
-                method: "POST",
-                body: new FormData(form)
-            });
+    method: "POST",
+    body: new FormData(form)
+});
 
             if (!response.ok) {
                 throw new Error(`Server returned ${response.status}`);
